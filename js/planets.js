@@ -1,9 +1,11 @@
+BASE_URL = "https://swapi.dev/api/planets";
+
 const renderPlanet = (el) => {
     let planetNumber = el.url.replace(/\D/g, "");
     let html = `
     <li class="list-group-item m-3 border-0">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${planetNumber}">
-        ${el.name} 
+        ${planetNumber}. ${el.name} 
     </button>
     <div class="modal fade" id="${planetNumber}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -34,6 +36,7 @@ const renderPlanet = (el) => {
     `
     return html
 }
+
 const renderPlanets = (data) => {
     let planets = document.querySelector(".list-group");
     planets.innerHTML = "";
@@ -48,4 +51,25 @@ async function getDataFromServer(url) {
     renderPlanets(data)
 }
 
-getDataFromServer("https://swapi.dev/api/planets");
+let pageNumber = 1;
+
+function changePage() {
+    let buttonNext = document.querySelector(".btn-success");
+    buttonNext.addEventListener("click", function () {
+        pageNumber += 1;
+        newUrl =  BASE_URL + `/?page=${pageNumber}`
+        getDataFromServer(newUrl)
+    }); 
+
+    let buttonPrevious = document.querySelector(".btn-danger");
+    buttonPrevious.addEventListener("click", function () {
+        if (pageNumber != 1) {
+            pageNumber -= 1;
+            newUrl =  BASE_URL + `/?page=${pageNumber}`
+            getDataFromServer(newUrl)
+        }
+    }); 
+}
+
+changePage();
+getDataFromServer(BASE_URL);

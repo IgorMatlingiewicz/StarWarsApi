@@ -1,10 +1,12 @@
+let BASE_URL = "https://swapi.dev/api/people"
+
 const renderCharacter = (el) => {
     let characterNumber = el.url.replace(/\D/g, "");
     let homeworldLink = el.homeworld.replace(/\D/g, "");
     let html = `
     <li class="list-group-item m-3 border-0">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${characterNumber}">
-        ${el.name} 
+        ${characterNumber}. ${el.name} 
     </button>
     <div class="modal fade" id="${characterNumber}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -52,4 +54,25 @@ async function getDataFromServer(url) {
     renderCharacters(data)
 }
 
-getDataFromServer("https://swapi.dev/api/people");
+let pageNumber = 1;
+
+function changePage() {
+    let buttonNext = document.querySelector(".btn-success");
+    buttonNext.addEventListener("click", function () {
+        pageNumber += 1;
+        newUrl =  BASE_URL + `/?page=${pageNumber}`
+        getDataFromServer(newUrl)
+    }); 
+
+    let buttonPrevious = document.querySelector(".btn-danger");
+    buttonPrevious.addEventListener("click", function () {
+        if (pageNumber != 1) {
+            pageNumber -= 1;
+            newUrl =  BASE_URL + `/?page=${pageNumber}`
+            getDataFromServer(newUrl)
+        }
+    }); 
+}
+
+changePage();
+getDataFromServer(BASE_URL);

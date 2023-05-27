@@ -1,0 +1,83 @@
+.icon {
+  height: 36px;
+}
+.icon.grass {
+  background-image: url(../img/grass.png);
+  width: 36px;
+}
+.icon.grasshill {
+  background-image: url(../img/grassy-hill.png);
+  width: 39px;
+}
+.icon.mountain {
+  background-image: url(../img/mountains.png);
+  width: 52px;
+}
+.icon.cave {
+  background-image: url(../img/caves.png);
+  width: 43px;
+}
+.icon.jungle {
+  background-image: url(../img/jungle.png);
+  width: 25px;
+}
+.icon.forest {
+  background-image: url(../img/forest.png);
+  width: 36px;
+}
+.icon.swamp {
+  background-image: url(../img/swamp.png);
+  width: 32px;
+}
+.icon.gas_giant {
+  background-image: url(../img/gas-planet.png);
+  width: 36px;
+}
+.icon.lake {
+  background-image: url(../img/lakes.png);
+  width: 40px;
+}
+.icon.ocean {
+  background-image: url(../img/ocean.png);
+  width: 39px;
+}
+.icon.cityscape {
+  background-image: url(../img/cityscape.png);
+  width: 36px;
+}
+.icon.desert {
+  background-image: url(../img/desert.png);
+  width: 47px;
+}
+.icon.canyon {
+  background-image: url(../img/canyon.png);
+  width: 36px;
+}
+.icon.savanna {
+  background-image: url(../img/savanna.png);
+  width: 56px;
+}
+.icon.volcano {
+  background-image: url(../img/volcano.png);
+  width: 36px;
+}
+.icon.river {
+  background-image: url(../img/river.png);
+  width: 26px;
+}
+.icon.asteroid {
+  background-image: url(../img/asteroid.png);
+  width: 36px;
+}
+.icon.glacier {
+  background-image: url(../img/glacier.png);
+  width: 36px;
+}
+.icon.island {
+  background-image: url(../img/island.png);
+  width: 36px;
+}
+.icon.rockarch {
+  background-image: url(../img/rockarch.png);
+  width: 36px;
+}/*# sourceMappingURL=styles.css.map */
