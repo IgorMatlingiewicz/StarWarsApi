@@ -1,0 +1,110 @@
+.terrain {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    height: 36px;
+
+    &.grass {
+        background-image: url(../icons/grass.png);
+        width: 36px;
+    }
+
+    &.grasshill {
+        background-image: url(../icons/grassy-hill.png);
+        width: 39px;
+    }
+
+    &.mountain {
+        background-image: url(../icons/mountains.png);
+        width: 52px;
+    }
+
+    &.cave {
+        background-image: url(../icons/caves.png);
+        width: 43px;
+    }
+
+    &.jungle {
+        background-image: url(../icons/jungle.png);
+        width: 25px;
+    }
+
+    &.forest {
+        background-image: url(../icons/forest.png);
+        width: 36px;
+    }
+
+    &.swamp {
+        background-image: url(../icons/swamp.png);
+        width: 32px;
+    }
+
+    &.gas_giant {
+        background-image: url(../icons/gas-planet.png);
+        width: 36px;
+    }
+
+    &.lake {
+        background-image: url(../icons/lakes.png);
+        width: 40px;
+    }
+
+    &.ocean {
+        background-image: url(../icons/ocean.png);
+        width: 39px;
+    }
+
+    &.cityscape {
+        background-image: url(../icons/cityscape.png);
+        width: 36px;
+    }
+
+    &.desert {
+        background-image: url(../icons/desert.png);
+        width: 47px;
+    }
+
+    &.canyon {
+        background-image: url(../icons/canyon.png);
+        width: 36px;
+    }
+
+    &.savanna {
+        background-image: url(../icons/savanna.png);
+        width: 56px;
+    }
+
+    &.volcano {
+        background-image: url(../icons/volcano.png);
+        width: 36px;
+    }
+
+    &.river {
+        background-image: url(../icons/river.png);
+        width: 26px;
+    }
+
+    &.asteroid {
+        background-image: url(../icons/asteroid.png);
+        width: 36px;
+    }
+
+    &.glacier {
+        background-image: url(../icons/glacier.png);
+        width: 36px;
+    }
+
+    &.island {
+        background-image: url(../icons/island.png);
+        width: 36px;
+    }
+
+    &.rockarch {
+        background-image: url(../icons/rockarch.png);
+        width: 36px;
+    }
+}

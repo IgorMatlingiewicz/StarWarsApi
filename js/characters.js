@@ -1,14 +1,15 @@
-let BASE_URL = "https://swapi.dev/api/people"
+CharactersUrl = BaseUrl + "/people";
 
-const renderCharacter = (el) => {
+const renderCharacterGrid = (el) => {
     let characterNumber = el.url.replace(/\D/g, "");
     let homeworldLink = el.homeworld.replace(/\D/g, "");
     let html = `
-    <li class="list-group-item m-3 border-0">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${characterNumber}">
+    <div class="col-sm">
+        <li class="list-group-item m-3 border-0">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${characterNumber}">
         ${characterNumber}. ${el.name} 
-    </button>
-    <div class="modal fade" id="${characterNumber}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        </button>
+        <div class="modal fade" id="${characterNumber}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -35,16 +36,40 @@ const renderCharacter = (el) => {
                 </div>
             </div>
         </div>
+        </div>
+        </li>
     </div>
-</li>
     `
     return html
 }
+const renderCharacterTable = (el) => {
+    let characterNumber = el.url.replace(/\D/g, "");
+    let homeworldLink = el.homeworld.replace(/\D/g, "");
+    let html = `
+    <tr class="text-center border">
+        <th scope="row">${characterNumber}</th>
+        <td><h2>${el.name}</h2></td>
+        <td>${el.height}</td>
+        <td>${el.mass}</td>
+        <td>${el.hair_color}</td>
+        <td>${el.skin_color}</td>
+        <td>${el.eye_color}</td>
+        <td>${el.birth_year}</td>
+        <td>${el.gender}</td>
+        <td>${homeworldLink}</td>
+    </tr>
+    `
+    return html
+}
+
 const renderCharacters = (data) => {
-    let characters = document.querySelector(".list-group");
-    characters.innerHTML = "";
+    let charactersGrid = document.querySelector(".row");
+    let charactersTable = document.querySelector("tbody");
+    charactersGrid.innerHTML = "";
+    charactersTable.innerHTML = "";
     data.results.map(character => {
-        characters.innerHTML += renderCharacter(character)
+        charactersGrid.innerHTML += renderCharacterGrid(character);
+        charactersTable.innerHTML += renderCharacterTable(character);
     })
 }
 
@@ -59,20 +84,22 @@ let pageNumber = 1;
 function changePage() {
     let buttonNext = document.querySelector(".btn-success");
     buttonNext.addEventListener("click", function () {
-        pageNumber += 1;
-        newUrl =  BASE_URL + `/?page=${pageNumber}`
-        getDataFromServer(newUrl)
-    }); 
+        if (pageNumber != 9) {
+            pageNumber += 1;
+            newUrl = CharactersUrl + `/?page=${pageNumber}`
+            getDataFromServer(newUrl)
+        }
+    });
 
     let buttonPrevious = document.querySelector(".btn-danger");
     buttonPrevious.addEventListener("click", function () {
         if (pageNumber != 1) {
             pageNumber -= 1;
-            newUrl =  BASE_URL + `/?page=${pageNumber}`
+            newUrl = CharactersUrl + `/?page=${pageNumber}`
             getDataFromServer(newUrl)
         }
-    }); 
+    });
 }
 
 changePage();
-getDataFromServer(BASE_URL);
+getDataFromServer(CharactersUrl);

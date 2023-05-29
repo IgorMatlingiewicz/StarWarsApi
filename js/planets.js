@@ -1,6 +1,17 @@
-BASE_URL = "https://swapi.dev/api/planets";
+PlanetsUrl = BaseUrl + "/planets";
 
-const renderPlanet = (el) => {
+function getCSSclass(terrain){
+    let result;
+    terrains.filter(e=>{
+       if(e.inputData.some(e=> e == terrain) == true){
+         result = e.CSSclass
+        
+        }
+    })
+    return result;
+}
+
+const renderPlanetGrid = (el) => {
     let planetNumber = el.url.replace(/\D/g, "");
     let html = `
     <li class="list-group-item m-3 border-0">
@@ -37,11 +48,45 @@ const renderPlanet = (el) => {
     return html
 }
 
+const renderPlanetTable = (el) => {
+    renderIcons(el.terrain);
+    let planetNumber = el.url.replace(/\D/g, "");
+    let html = `
+    <tr class="text-center border">
+        <th scope="row">${planetNumber}</th>
+        <td><h2>${el.name}</h2></td>
+        <td>${el.rotation_period}</td>
+        <td>${el.orbital_period}</td>
+        <td>${el.diameter}</td>
+        <td>${el.climate}</td>
+        <td>${el.gravity}</td>
+        <td class="terrain">
+            ${renderIcons(el.terrain)}
+        </td>
+        <td>${el.surface_water}</td>
+        <td>${el.population}</td>
+    </tr>
+    `
+    return html
+}
+
+const renderIcons = (terrains) => {
+    let terrainsList = terrains.split(",");
+    let html = "";
+    terrainsList.map(el => {
+        html += `<div class="icon ${getCSSclass(el.trim())}"></div>`
+    })
+    return html
+}
+
 const renderPlanets = (data) => {
-    let planets = document.querySelector(".list-group");
-    planets.innerHTML = "";
+    let planetsGrid = document.querySelector(".row");
+    let planetsTable = document.querySelector("tbody");
+    planetsGrid.innerHTML = "";
+    planetsTable.innerHTML = "";
     data.results.map(planet => {
-        planets.innerHTML += renderPlanet(planet)
+        planetsGrid.innerHTML += renderPlanetGrid(planet)
+        planetsTable.innerHTML += renderPlanetTable(planet)
     })
 }
 
@@ -56,20 +101,22 @@ let pageNumber = 1;
 function changePage() {
     let buttonNext = document.querySelector(".btn-success");
     buttonNext.addEventListener("click", function () {
-        pageNumber += 1;
-        newUrl =  BASE_URL + `/?page=${pageNumber}`
-        getDataFromServer(newUrl)
+        if (pageNumber != 6) {
+            pageNumber += 1;
+            newUrl =  PlanetsUrl + `/?page=${pageNumber}`
+            getDataFromServer(newUrl)
+        }
     }); 
 
     let buttonPrevious = document.querySelector(".btn-danger");
     buttonPrevious.addEventListener("click", function () {
         if (pageNumber != 1) {
             pageNumber -= 1;
-            newUrl =  BASE_URL + `/?page=${pageNumber}`
+            newUrl =  PlanetsUrl + `/?page=${pageNumber}`
             getDataFromServer(newUrl)
         }
     }); 
 }
 
 changePage();
-getDataFromServer(BASE_URL);
+getDataFromServer(PlanetsUrl);
