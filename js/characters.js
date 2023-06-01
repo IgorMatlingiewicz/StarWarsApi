@@ -5,15 +5,15 @@ const renderCharacterGrid = (el) => {
     let homeworldLink = el.homeworld.replace(/\D/g, "");
     let html = `
     <div class="col-sm">
-        <li class="list-group-item m-3 border-0">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#${characterNumber}">
+        <li class="list-group-item border-0 m-3 bg-transparent">
+        <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal" data-bs-target="#${characterNumber}">
         ${characterNumber}. ${el.name} 
         </button>
         <div class="modal fade" id="${characterNumber}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel"> ${el.name} </h1>
+                    <h1 class="modal-title fs-5 font-weight-bold text-primary" id="exampleModalLabel"> ${el.name} </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -46,9 +46,9 @@ const renderCharacterTable = (el) => {
     let characterNumber = el.url.replace(/\D/g, "");
     let homeworldLink = el.homeworld.replace(/\D/g, "");
     let html = `
-    <tr class="text-center border">
+    <tr class="text-center border-bottom border-primary">
         <th scope="row">${characterNumber}</th>
-        <td><h2>${el.name}</h2></td>
+        <td><h2 class="font-weight-bold">${el.name}</h2></td>
         <td>${el.height}</td>
         <td>${el.mass}</td>
         <td>${el.hair_color}</td>
@@ -82,7 +82,7 @@ async function getDataFromServer(url) {
 let pageNumber = 1;
 
 function changePage() {
-    let buttonNext = document.querySelector(".btn-success");
+    let buttonNext = document.querySelector("#nextPage");
     buttonNext.addEventListener("click", function () {
         if (pageNumber != 9) {
             pageNumber += 1;
@@ -91,7 +91,7 @@ function changePage() {
         }
     });
 
-    let buttonPrevious = document.querySelector(".btn-danger");
+    let buttonPrevious = document.querySelector("#prevPage");
     buttonPrevious.addEventListener("click", function () {
         if (pageNumber != 1) {
             pageNumber -= 1;
