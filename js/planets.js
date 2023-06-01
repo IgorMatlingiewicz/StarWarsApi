@@ -1,4 +1,4 @@
-PlanetsUrl = BaseUrl + "/planets";
+PlanetsUrl = BaseUrl + "/planets/";
 
 function getCSSclass(terrain){
     let result;
@@ -23,7 +23,7 @@ const renderPlanetGrid = (el) => {
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 font-weight-bold text-primary" id="exampleModalLabel"> ${el.name} </h1>
+                    <h1 class="modal-title fs-5 fw-bold text-primary" id="exampleModalLabel"> ${el.name} </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -56,7 +56,7 @@ const renderPlanetTable = (el) => {
     let html = `
     <tr class="text-center border-bottom border-primary">
         <th scope="row">${planetNumber}</th>
-        <td><h2 class="font-weight-bold">${el.name}</h2></td>
+        <td><h2 class="fw-bold">${el.name}</h2></td>
         <td>${el.rotation_period}</td>
         <td>${el.orbital_period}</td>
         <td>${el.diameter}</td>
@@ -80,10 +80,10 @@ const renderIcons = (terrains) => {
     })
     return html
 }
+let planetsGrid = document.querySelector(".row");
+let planetsTable = document.querySelector("tbody");
 
 const renderPlanets = (data) => {
-    let planetsGrid = document.querySelector(".row");
-    let planetsTable = document.querySelector("tbody");
     planetsGrid.innerHTML = "";
     planetsTable.innerHTML = "";
     data.results.map(planet => {
@@ -93,9 +93,18 @@ const renderPlanets = (data) => {
 }
 
 async function getDataFromServer(url) {
+    loader.style.display = "block";
+    planetsGrid.innerHTML = "";
+    planetsTable.innerHTML = "";
     let phase1 = await fetch(url)
     let data = await phase1.json();
-    renderPlanets(data)
+
+    if (phase1.ok) {
+        loader.style.display = "none";
+        renderPlanets(data)
+    } else {
+        renderError();
+    }
 }
 
 let pageNumber = 1;

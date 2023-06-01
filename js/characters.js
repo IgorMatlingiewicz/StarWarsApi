@@ -1,4 +1,4 @@
-CharactersUrl = BaseUrl + "/people";
+CharactersUrl = BaseUrl + "/people/";
 
 const renderCharacterGrid = (el) => {
     let characterNumber = el.url.replace(/\D/g, "");
@@ -13,7 +13,7 @@ const renderCharacterGrid = (el) => {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 font-weight-bold text-primary" id="exampleModalLabel"> ${el.name} </h1>
+                    <h1 class="modal-title fs-5 fw-bold text-primary" id="exampleModalLabel"> ${el.name} </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -48,7 +48,7 @@ const renderCharacterTable = (el) => {
     let html = `
     <tr class="text-center border-bottom border-primary">
         <th scope="row">${characterNumber}</th>
-        <td><h2 class="font-weight-bold">${el.name}</h2></td>
+        <td><h2 class="fw-bold">${el.name}</h2></td>
         <td>${el.height}</td>
         <td>${el.mass}</td>
         <td>${el.hair_color}</td>
@@ -62,9 +62,10 @@ const renderCharacterTable = (el) => {
     return html
 }
 
+let charactersGrid = document.querySelector(".row");
+let charactersTable = document.querySelector("tbody");
+
 const renderCharacters = (data) => {
-    let charactersGrid = document.querySelector(".row");
-    let charactersTable = document.querySelector("tbody");
     charactersGrid.innerHTML = "";
     charactersTable.innerHTML = "";
     data.results.map(character => {
@@ -74,9 +75,18 @@ const renderCharacters = (data) => {
 }
 
 async function getDataFromServer(url) {
+    loader.style.display = "block";
+    charactersGrid.innerHTML = "";
+    charactersTable.innerHTML = "";
     let phase1 = await fetch(url)
     let data = await phase1.json();
-    renderCharacters(data)
+
+    if (phase1.ok) {
+        loader.style.display = "none";
+        renderCharacters(data)
+    } else {
+        renderError();
+    }
 }
 
 let pageNumber = 1;

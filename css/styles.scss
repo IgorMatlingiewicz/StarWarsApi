@@ -1,11 +1,13 @@
 @import "icons";
-@import "media";
 
 $primary: #2196f3;
 $secondary: darken($primary, 20);
 $gradient: linear-gradient(180deg, rgba(black, .15), rgba(41, 63, 122, 0.25));
-$box-shadow-lg: 0 1rem 3rem rgba(white, .175);
+$box-shadow-lg: 0 1rem 3rem rgba(white, .2);
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "loader";
+@import "media";
 
 
 thead {
