@@ -55,7 +55,7 @@ const renderPlanetTable = (el) => {
     let planetNumber = el.url.replace(/\D/g, "");
     let html = `
     <tr class="text-center border-bottom border-primary">
-        <th scope="row">${planetNumber}</th>
+        <th scope="row" data-testid="${planetNumber}>${planetNumber}</th>
         <td><h2 class="fw-bold">${el.name}</h2></td>
         <td>${el.rotation_period}</td>
         <td>${el.orbital_period}</td>
@@ -108,6 +108,8 @@ async function getDataFromServer(url) {
 }
 
 let pageNumber = 1;
+const pageNumberSpan = document.getElementById('pageNumber')
+pageNumberSpan.textContent = pageNumber
 
 function changePage() {
     let buttonNext = document.querySelector("#nextPage");
@@ -116,6 +118,7 @@ function changePage() {
             pageNumber += 1;
             newUrl =  PlanetsUrl + `/?page=${pageNumber}`
             getDataFromServer(newUrl)
+            pageNumberSpan.textContent = pageNumber
         }
     }); 
 
@@ -125,6 +128,7 @@ function changePage() {
             pageNumber -= 1;
             newUrl =  PlanetsUrl + `/?page=${pageNumber}`
             getDataFromServer(newUrl)
+            pageNumberSpan.textContent = pageNumber
         }
     }); 
 }

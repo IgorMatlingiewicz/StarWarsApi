@@ -30,7 +30,7 @@
         </ul>
     
         <div class="d-flex justify-content-around mb-5">
-            <h1>Planets</h1>
+            <h1 data-testid="site_header">Planets</h1>
         </div>
 
         <div class="loader my-5"></div>
@@ -61,10 +61,11 @@
               </table>
         </div>
     
-        <ul class="nav d-flex justify-content-center">
+        <ul class="nav d-flex justify-content-center align-items-center"">
             <li class="nav-item mx-3">
                 <button type="button" id="prevPage" class="btn btn-secondary ml-3 mr-3">Previous</button>
             </li>
+            <span id="pageNumber" data-testid="pageNumber"></span>
             <li class="nav-item mx-3">
                 <button type="button" id="nextPage" class="btn btn-secondary ml-3 mr-3">Next</button>
             </li>

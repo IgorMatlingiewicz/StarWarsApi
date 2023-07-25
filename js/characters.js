@@ -47,7 +47,7 @@ const renderCharacterTable = (el) => {
     let homeworldLink = el.homeworld.replace(/\D/g, "");
     let html = `
     <tr class="text-center border-bottom border-primary">
-        <th scope="row">${characterNumber}</th>
+        <th scope="row" data-testid="${characterNumber}">${characterNumber}</th>
         <td><h2 class="fw-bold">${el.name}</h2></td>
         <td>${el.height}</td>
         <td>${el.mass}</td>
@@ -90,6 +90,8 @@ async function getDataFromServer(url) {
 }
 
 let pageNumber = 1;
+const pageNumberSpan = document.getElementById('pageNumber')
+pageNumberSpan.textContent = pageNumber
 
 function changePage() {
     let buttonNext = document.querySelector("#nextPage");
@@ -98,15 +100,17 @@ function changePage() {
             pageNumber += 1;
             newUrl = CharactersUrl + `/?page=${pageNumber}`
             getDataFromServer(newUrl)
+            pageNumberSpan.textContent = pageNumber
         }
     });
-
+    
     let buttonPrevious = document.querySelector("#prevPage");
     buttonPrevious.addEventListener("click", function () {
         if (pageNumber != 1) {
             pageNumber -= 1;
             newUrl = CharactersUrl + `/?page=${pageNumber}`
             getDataFromServer(newUrl)
+            pageNumberSpan.textContent = pageNumber
         }
     });
 }
